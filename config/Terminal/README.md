@@ -1,0 +1,1 @@
+configuration files for the OSX Terminal app
