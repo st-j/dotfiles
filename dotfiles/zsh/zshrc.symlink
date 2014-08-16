@@ -47,18 +47,21 @@ EOBUNDLES
 
 #-----------------------------------------------------------------
 # local bundles
-MY_PLUGINS=$HOME/SCM/Misc/dotfiles/zsh-plugins
+MY_DOTFILES=$HOME/SCM/Misc/dotfiles
+MY_PLUGINS=$MY_DOTFILES/zsh-plugins
 
 antigen bundle $MY_PLUGINS/system --no-local-clone
 antigen bundle $MY_PLUGINS/python --no-local-clone
 antigen bundle $MY_PLUGINS/homebrew --no-local-clone
 antigen bundle $MY_PLUGINS/tex --no-local-clone
+antigen bundle $MY_PLUGINS/git --no-local-clone
 
 #-----------------------------------------------------------------
 # theme
 
 # antigen theme robbyrussell
-antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
 # antigen theme pygmalion
+antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
+#antigen theme $MY_DOTFILES/themes ste-powerline --no-local-clone 
 
 antigen apply
