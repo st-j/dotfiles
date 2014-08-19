@@ -66,3 +66,9 @@ antigen theme jeremyFreeAgent/oh-my-zsh-powerline-theme powerline
 #antigen theme $MY_DOTFILES/themes ste-powerline --no-local-clone 
 
 antigen apply
+
+#-----------------------------------------------------------------
+# some additional settings
+
+# allow comments in interactive shell
+setopt interactivecomments
