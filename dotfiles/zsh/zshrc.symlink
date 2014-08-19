@@ -55,6 +55,7 @@ antigen bundle $MY_PLUGINS/python --no-local-clone
 antigen bundle $MY_PLUGINS/homebrew --no-local-clone
 antigen bundle $MY_PLUGINS/tex --no-local-clone
 antigen bundle $MY_PLUGINS/git --no-local-clone
+antigen bundle $MY_PLUGINS/cmake --no-local-clone
 
 #-----------------------------------------------------------------
 # theme
