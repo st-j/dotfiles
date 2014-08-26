@@ -9,3 +9,7 @@ fi
 # clustergit
 alias cgr='clustergit --recursive'
 alias cgrp='clustergit --recursive --pull'
+
+# git flow
+alias gfl='git flow'
+alias gff='git flow feature'
