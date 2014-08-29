@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-entname=`print -P "%2/" | sed -e 's/\//_/'`_`date "+%Y-%m-%d"`.txt
+entname=`print -P "%2/" | sed -e 's/\//_/'`_`date "+%Y-%m-%d"`.tex
 
 echo "Creatying journal entry " $entname
 touch $entname
