@@ -2,6 +2,11 @@
 
 entname=`print -P "%2/" | sed -e 's/\//_/'`_`date "+%Y-%m-%d"`.tex
 
-echo "Creatying journal entry " $entname
-touch $entname
+if [[ -e $entname ]]
+then
+	echo "journal entry $entname already exists, doing nothing"
+else
+	echo "Creating journal entry " $entname
+	echo "%%% file $entname" >> $entname
+fi
 subl $entname
