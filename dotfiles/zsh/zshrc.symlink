@@ -57,6 +57,7 @@ antigen bundle $MY_PLUGINS/tex --no-local-clone
 antigen bundle $MY_PLUGINS/git --no-local-clone
 antigen bundle $MY_PLUGINS/svn --no-local-clone
 antigen bundle $MY_PLUGINS/cmake --no-local-clone
+antigen bundle $MY_PLUGINS/ninja --no-local-clone
 
 #-----------------------------------------------------------------
 # theme
