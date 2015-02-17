@@ -11,3 +11,6 @@ eval `/usr/libexec/path_helper -s`
 # some directory bookmarks
 export UNRISK_SRC=$HOME/SCM/Work/Finance/unrisk
 
+# added by perl
+PERL_MB_OPT="--install_base \"/Users/stefan/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/stefan/perl5"; export PERL_MM_OPT;
