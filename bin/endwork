@@ -1,11 +1,13 @@
 #!/bin/bash
 
+echo "-------------------------------------------------------------------------"
 echo "checking git repositories..."
 echo
 cd $HOME/SCM
 clustergit --recursive -H
+echo
+echo
 
-echo
-echo
+echo "-------------------------------------------------------------------------"
 echo "checking for Wuala sync conflicts"
 checkwuala
