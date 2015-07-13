@@ -27,8 +27,9 @@
 
 (setq my-package-list
 	  '(slime ac-slime yaml-mode cmake-mode python-mode gnuplot auctex
-			  auto-complete-auctex icicles pivotal-tracker palette
-			  helm))
+		auto-complete-auctex icicles pivotal-tracker palette transpose-frame
+		helm
+		yasnippet common-lisp-snippets))
 
 (mapc #'package-install my-package-list)
 
@@ -37,9 +38,15 @@
 ;;
 ;; keybindings
 ;;
-(global-set-key [(f11)] 'compile)
-(windmove-default-keybindings)
 
+;; switch between windows using cmd-arrowkey
+(windmove-default-keybindings)
+(global-set-key (kbd "s-<left>")  'windmove-left)
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<up>")    'windmove-up)
+(global-set-key (kbd "s-<down>")  'windmove-down)
+
+;; cycle through windows
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-,") 'prev-window)
 
@@ -71,10 +78,13 @@
 ;; "less-annoyingly-jerky-scrolling)
 ;;
 (setq redisplay-dont-pause t
-  scroll-margin 1
-  scroll-step 1
-  scroll-conservatively 10000
-  scroll-preserve-screen-position 1)
+	  scroll-margin 1
+	  scroll-step 1
+	  scroll-conservatively 10000
+	  scroll-preserve-screen-position 1
+	  mouse-wheel-scroll-amount '(1 ((shift) . 1))
+	  mouse-wheel-progressive-speed nil
+	  mouse-wheel-follow-mouse 't)
 
 ;;
 ;; display ansi colors in comint mode (shell output, ...)
@@ -104,6 +114,44 @@
 ;;
 
 ;;
+;; Helm
+;;
+(require 'helm)
+(require 'helm-config)
+
+;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "s-p") 'helm-buffers-list)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t)
+
+(helm-mode 1)
+
+;;
+;; yasnippet
+;;
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+;;
 ;; pivotal tracker
 ;;
 (setq pivotal-api-token "88a340d0a195c97ece1ea25be7cb3692")
@@ -117,8 +165,8 @@
 ;;
 ;; icicles
 ;;
-(require 'icicles)
-(icy-mode 1)
+;;(require 'icicles)
+;;(icy-mode 1)
 
 ;;
 ;; auto-complete
