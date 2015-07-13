@@ -7,7 +7,7 @@
 (setq font-lock-maximum-decoration t)
 (setq transient-mark-mode t)
 (show-paren-mode t) ; always highlight matching parentheses
-(tool-bar-mode -1) ; hide toolbar
+(if window-system (tool-bar-mode -1)) ; hide toolbar
 (setq default-tab-width 4) 
 (setq tab-width 4)
 (setq c-basic-offset 4)
@@ -29,7 +29,8 @@
 	  '(slime ac-slime yaml-mode cmake-mode python-mode gnuplot auctex
 		auto-complete-auctex icicles pivotal-tracker palette transpose-frame
 		helm
-		yasnippet common-lisp-snippets))
+		yasnippet common-lisp-snippets
+		emmet-mode))
 
 (mapc #'package-install my-package-list)
 
@@ -147,9 +148,22 @@
 ;;
 ;; yasnippet
 ;;
-
 (require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                        ;; personal snippets
+        "/Users/stefan/SCM/Misc/ste-yasnippets"      ;; personal collection
+        "/Users/stefan/SCM/Misc/yasnippet-snippets"  ;; the default collection
+        ))
 (yas-global-mode 1)
+
+;;
+;; emmet
+;;
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+(setq emmet-move-cursor-between-quotes t) ;; default nil
+
 
 ;;
 ;; pivotal tracker
@@ -192,6 +206,25 @@
 ;; ;; (load "preview-latex.el" nil t t) ;; apparently comes with auctex
 (add-hook 'LaTeX-mode-hook (lambda () (turn-on-auto-fill)))
 (require 'auto-complete-auctex)
+
+;; make latexmk available via C-c C-c
+;; Note: SyncTeX is setup via ~/.latexmkrc (see below)
+(add-hook 'LaTeX-mode-hook (lambda ()
+  (push
+    '("latexmk" "latexmk -pdf %s" TeX-run-TeX nil t
+      :help "Run latexmk on file")
+    TeX-command-list)))
+(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
+
+;; use Skim as default pdf viewer
+;; Skim's displayline is used for forward search (from .tex to .pdf)
+;; option -b highlights the current line; option -g opens Skim in the background  
+(setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+(setq TeX-view-program-list
+     '(("PDF Viewer" "/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+
+(server-start); start emacs in server mode so that skim can talk to it
+
 
 ;;;
 ;; yaml mode
