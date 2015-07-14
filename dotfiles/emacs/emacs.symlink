@@ -32,7 +32,8 @@
 		yasnippet common-lisp-snippets
 		emmet-mode
 		multiple-cursors mc-extras
-		expand-region))
+		expand-region
+		magit magit-gitflow magit-popup))
 
 (mapc #'package-install my-package-list)
 
