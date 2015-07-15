@@ -22,9 +22,9 @@
 ;; packages
 ;;
 (require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/")
-			 '("SC"    . "http://joseito.republika.pl/sunrise-commander/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("SC"    . "http://joseito.republika.pl/sunrise-commander/"))
+
 (package-initialize) ;; You might already have this line
 
 (setq my-package-list
@@ -35,7 +35,11 @@
 		emmet-mode
 		multiple-cursors mc-extras
 		expand-region
-		magit magit-gitflow magit-popup))
+		magit magit-gitflow magit-popup
+		git-timemachine
+		sunrise-commander sunrise-x-buttons sunrise-x-tree
+		git-gutter-fringe+
+		paredit))
 
 (mapc #'package-install my-package-list)
 
@@ -165,6 +169,13 @@
         "/Users/stefan/SCM/Misc/yasnippet-snippets"  ;; the default collection
         ))
 (yas-global-mode 1)
+
+
+;;
+;; git gutter
+;;
+(require 'git-gutter-fringe+)
+
 
 ;;
 ;; emmet
