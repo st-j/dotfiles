@@ -1,3 +1,4 @@
+;; -*- mode: lisp -*-
 ;;==============================================================================
 ;;==============================================================================
 ;;
@@ -22,7 +23,8 @@
 ;;
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/"))
+             '("melpa" . "http://melpa.org/packages/")
+			 '("SC"    . "http://joseito.republika.pl/sunrise-commander/"))
 (package-initialize) ;; You might already have this line
 
 (setq my-package-list
@@ -40,8 +42,8 @@
 ;;==============================================================================
 ;;==============================================================================
 ;;
-;; keybindings
-;;
+;; global keybindings (keybindings for specific modes: see below)
+;; 
 
 ;; switch between windows using cmd-arrowkey
 (windmove-default-keybindings)
@@ -57,6 +59,11 @@
 (defun prev-window ()
   (interactive)
   (other-window -1))
+
+;; cycle buffers
+(global-set-key (kbd "C->") 'next-buffer)
+(global-set-key (kbd "C-<") 'previous-buffer)
+
 
 ;;==============================================================================
 ;;==============================================================================
@@ -172,9 +179,11 @@
 ;;
 (require 'multiple-cursors)
 (global-set-key (kbd "s-S-<down>") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "s-g") 'mc/mark-next-like-this)
+(global-set-key (kbd "S-s-g") 'mc/unmark-next-like-this)
+(global-set-key (kbd "s-d") 'mc/mark-previous-like-this)
+(global-set-key (kbd "S-s-d") 'mc/unmark-previous-like-this)
+(global-set-key (kbd "C-c s-g") 'mc/mark-all-like-this)
 
 ;;
 ;; expand region
