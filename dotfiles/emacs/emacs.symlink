@@ -39,7 +39,8 @@
 		git-timemachine
 		sunrise-commander sunrise-x-buttons sunrise-x-tree
 		git-gutter-fringe+
-		paredit))
+		paredit
+		markdown-mode))
 
 (mapc #'package-install my-package-list)
 
@@ -48,6 +49,10 @@
 ;;
 ;; global keybindings (keybindings for specific modes: see below)
 ;; 
+
+;; switch command and control keys
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
 
 ;; switch between windows using cmd-arrowkey
 (windmove-default-keybindings)
@@ -227,6 +232,20 @@
 (global-auto-complete-mode t)
 
 ;;
+;; markdown mode
+;;
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.mdown$" . markdown-mode))
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (visual-line-mode t)
+            (writegood-mode t)
+            (flyspell-mode t)))
+(setq markdown-command "pandoc --smart -f markdown -t html")
+(setq markdown-css-paths
+	  '("/Users/stefan/Library/Application Support/Mou/CSS/Clearness.css"))
+
+;;
 ;; SLIME
 ;;
 
@@ -278,11 +297,6 @@
 ;;        (append '(("CMakeLists\\.txt\\'" . cmake-mode)
 ;;                  ("\\.cmake\\'" . cmake-mode))
 ;;auto-mode-alist))
-
-;;
-;; Magit mode
-;;
-;; (require 'magit)
 
 ;;
 ;; gnuplot mode
