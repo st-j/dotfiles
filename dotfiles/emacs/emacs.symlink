@@ -1,9 +1,9 @@
 ;; -*- mode: lisp -*-
-;;==============================================================================
-;;==============================================================================
-;;
-;; global stuff
-;;
+;;;==============================================================================
+;;;==============================================================================
+;;;
+;;; global stuff
+;;;
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 (setq transient-mark-mode t)
@@ -16,11 +16,11 @@
 (setq-default fill-column 95)
 (require 'whitespace)
 
-;;==============================================================================
-;;==============================================================================
-;;
-;; packages
-;;
+;;;==============================================================================
+;;;==============================================================================
+;;;
+;;; package management
+;;;
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("SC"    . "http://joseito.republika.pl/sunrise-commander/"))
@@ -44,11 +44,14 @@
 
 (mapc #'package-install my-package-list)
 
-;;==============================================================================
-;;==============================================================================
-;;
-;; global keybindings (keybindings for specific modes: see below)
-;; 
+;;;==============================================================================
+;;;==============================================================================
+;;;
+;;; global keybindings (keybindings for specific modes: see below)
+;;; 
+
+;; osx full screen
+(global-set-key (kbd "s-<f11>") 'toggle-frame-fullscreen)
 
 ;; switch command and control keys
 (setq mac-command-modifier 'control)
@@ -73,12 +76,16 @@
 (global-set-key (kbd "C->") 'next-buffer)
 (global-set-key (kbd "C-<") 'previous-buffer)
 
+;; adjust text scale
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(setq text-scale-mode-step 1.1)
 
 ;;==============================================================================
 ;;==============================================================================
-;;
-;; UI tweaks
-;;
+;;;
+;;; UI tweaks
+;;;
 
 ;;
 ;; uniquify buffer names by prepending elements from the path
@@ -127,11 +134,19 @@
 ;;
 (display-time-mode 1)
 
-;;==============================================================================
-;;==============================================================================
-;;
-;; modes
-;;
+;; line/column numbers
+(setq line-number-mode t)
+(setq column-number-mode t)
+
+;; auto fill column
+(setq-default fill-column 90)
+
+
+;;;==============================================================================
+;;;==============================================================================
+;;;
+;;; mode/package configurations
+;;;
 
 ;;
 ;; Helm
@@ -175,6 +190,10 @@
         ))
 (yas-global-mode 1)
 
+;;
+;; org-mode
+;;
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ;;
 ;; git gutter
@@ -283,7 +302,7 @@
 (server-start); start emacs in server mode so that skim can talk to it
 
 
-;;;
+;;
 ;; yaml mode
 (autoload 'yaml-mode "yaml-mode" "YAML" t)
 (setq auto-mode-alist
@@ -352,6 +371,14 @@
 ;; (setq auto-mode-alist
 ;;    (cons '("\\.tjp\\'" . shell-script-mode) auto-mode-alist))
 ;; (require 'taskjuggler-mode)
+
+
+;;;==============================================================================
+;;;==============================================================================
+;;;
+;;; custom
+;;;
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
