@@ -50,12 +50,22 @@
 ;;; global keybindings (keybindings for specific modes: see below)
 ;;; 
 
-;; osx full screen
-(global-set-key (kbd "s-<f11>") 'toggle-frame-fullscreen)
-
 ;; switch command and control keys
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
+
+;; M-u is normally bound to "upcase word" which I need far, far less then
+;; OSX's standard compose key for umlauts.
+(global-unset-key (kbd "M-u"))
+(global-set-key (kbd "M-u a") (lambda () (interactive) (insert "ä")))
+(global-set-key (kbd "M-u o") (lambda () (interactive) (insert "ö")))
+(global-set-key (kbd "M-u u") (lambda () (interactive) (insert "ü")))
+(global-set-key (kbd "M-u A") (lambda () (interactive) (insert "Ä")))
+(global-set-key (kbd "M-u O") (lambda () (interactive) (insert "Ö")))
+(global-set-key (kbd "M-u U") (lambda () (interactive) (insert "Ü")))
+
+;; osx full screen
+(global-set-key (kbd "s-<f11>") 'toggle-frame-fullscreen)
 
 ;; switch between windows using cmd-arrowkey
 (windmove-default-keybindings)
@@ -194,6 +204,21 @@
 ;; org-mode
 ;;
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+(setq org-agenda-files (list "~/CloudDrive/org/"))
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;;
+;; MobileOrg
+;;
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/CloudDrive/org")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/CloudDrive/org/mobileinbox.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
 ;;
 ;; git gutter
