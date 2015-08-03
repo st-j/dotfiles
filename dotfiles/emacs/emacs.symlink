@@ -31,6 +31,7 @@
 	  '(slime ac-slime yaml-mode cmake-mode python-mode gnuplot auctex
 		auto-complete-auctex icicles pivotal-tracker palette transpose-frame
 		helm
+		monokai-theme
 		yasnippet common-lisp-snippets
 		emmet-mode
 		multiple-cursors mc-extras
@@ -225,6 +226,7 @@
 (setq org-log-into-drawer t) ; needs to be set before calling org-clock-persistence-insinuate
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
+(setq org-log-note-clock-out t) ; enter note when clocking out
 
 ;; refile config, taken from http://doc.norang.ca/org-mode.html#Refiling
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
