@@ -203,12 +203,41 @@
 ;;
 ;; org-mode
 ;;
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(setq org-agenda-files (list "~/CloudDrive/org/"))
+;; shortcuts
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+
+;; use auto-fill in org mode
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+;; agenda configuration
+;; which files to take into account for the agenda (all in the top-level org dir)
+(setq org-agenda-files (list "~/CloudDrive/org/"))
+
+;; todos
+
+; log time of todo changes
+(setq org-log-done 'time)
+; the following would require a note when switching to a done state
+(setq org-log-done 'note)
+
+;; clocking 
+(setq org-log-into-drawer t) ; needs to be set before calling org-clock-persistence-insinuate
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
+
+;; refile config, taken from http://doc.norang.ca/org-mode.html#Refiling
+; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets (quote ((nil :maxlevel . 5)
+                                 (org-agenda-files :maxlevel . 5 ))))
+
+; Use full outline paths for refile targets - we file directly with IDO
+(setq org-refile-use-outline-path t)
+
+; Allow refile to create parent tasks with confirmation
+(setq org-refile-allow-creating-parent-nodes (quote confirm))
+
+
 
 ;;
 ;; MobileOrg
@@ -216,7 +245,7 @@
 ;; Set to the location of your Org files on your local system
 (setq org-directory "~/CloudDrive/org")
 ;; Set to the name of the file where new notes will be stored
-(setq org-mobile-inbox-for-pull "~/CloudDrive/org/mobileinbox.org")
+(setq org-mobile-inbox-for-pull "~/CloudDrive/org/inbox-mobile.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
@@ -238,7 +267,7 @@
 ;; multiple cursors
 ;;
 (require 'multiple-cursors)
-(global-set-key (kbd "s-S-<down>") 'mc/edit-lines)
+(global-set-key (kbd "C-S-l") 'mc/edit-lines)
 (global-set-key (kbd "s-g") 'mc/mark-next-like-this)
 (global-set-key (kbd "S-s-g") 'mc/unmark-next-like-this)
 (global-set-key (kbd "s-d") 'mc/mark-previous-like-this)
@@ -251,6 +280,12 @@
 (require 'expand-region)
 (global-set-key (kbd "s-.") 'er/expand-region)
 
+;;
+;; Easy PG
+;;
+(require 'epa-file)
+(epa-file-enable)
+(setq epg-gpg-program "/usr/local/bin/gpg")
 
 ;;
 ;; pivotal tracker
@@ -345,13 +380,19 @@
 ;;
 ;; gnuplot mode
 ;;
-;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/gnuplot-mode")
-;; ;; extracted from dotemacs file distributed with the source tarball
+
+;; load the file
+(require 'gnuplot)
+    
+;; specify the gnuplot executable (if other than /usr/bin/gnuplot)
+(setq gnuplot-program "/usr/local/bin/gnuplot")
+
 (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
 (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
-(setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
-(global-set-key [(f9)] 'gnuplot-make-buffer)
 
+;; automatically open files ending with .gp or .gnuplot in gnuplot mode
+(setq auto-mode-alist 
+	  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
 
 ;; 
 ;; python
@@ -414,6 +455,7 @@
  '(custom-safe-themes
    (quote
 	("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
+ '(helm-ff-skip-boring-files t)
  '(org-src-fontify-natively t)
  '(org-src-tab-acts-natively t))
 (custom-set-faces
