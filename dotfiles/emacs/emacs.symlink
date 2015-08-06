@@ -239,7 +239,8 @@
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
-
+;; exporting
+(require 'ox-odt)
 
 ;;
 ;; MobileOrg
