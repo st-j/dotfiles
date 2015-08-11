@@ -230,6 +230,8 @@
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 (setq org-log-note-clock-out t) ; enter note when clocking out
+; clocktables format is hh:mm, not dd hh:mm (i.e., report time as 32:00, not 1d 8:00)
+(setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 
 ;; refile config, taken from http://doc.norang.ca/org-mode.html#Refiling
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
