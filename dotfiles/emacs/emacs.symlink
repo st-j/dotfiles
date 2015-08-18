@@ -244,6 +244,10 @@
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
+;; agenda
+(setq org-agenda-clockreport-parameter-plist
+	  '(:fileskip0 t))
+
 ;; exporting
 (require 'ox-odt)
 
