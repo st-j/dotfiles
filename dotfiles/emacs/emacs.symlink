@@ -406,6 +406,15 @@
 (setq auto-mode-alist 
 	  (append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
 
+
+;;
+;; VBA mode. Yuck. Yes, VBA.
+;;
+;;(require 'visual-basic-mode)
+(autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
+(setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\)$" .
+                                visual-basic-mode)) auto-mode-alist))
+
 ;; 
 ;; python
 ;;
