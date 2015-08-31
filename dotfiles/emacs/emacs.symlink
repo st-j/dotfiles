@@ -250,6 +250,7 @@
 ;; which files to take into account for the agenda (all in the top-level org dir)
 (setq org-agenda-files (list "~/CloudDrive/org/"))
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+(setq org-deadline-warning-days 0)
 
 ;; todos
 
