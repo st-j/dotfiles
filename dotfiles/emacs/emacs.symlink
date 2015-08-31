@@ -277,6 +277,20 @@
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes (quote confirm))
 
+
+;; preserve (somewhat) the integrity of your archive structure while archiving lower level items
+;; taken from http://orgmode.org/worg/org-hacks.html
+(defadvice org-archive-subtree (around my-org-archive-subtree activate)
+  (let ((org-archive-location
+         (if (save-excursion (org-back-to-heading)
+                             (> (org-outline-level) 1))
+             (concat (car (split-string org-archive-location "::"))
+                     "::* "
+                     (car (org-get-outline-path)))
+           org-archive-location)))
+    ad-do-it))
+
+
 ;; agenda
 (setq org-agenda-clockreport-parameter-plist
 	  '(:fileskip0 t))
