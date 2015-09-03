@@ -43,7 +43,8 @@
 		sunrise-commander sunrise-x-buttons sunrise-x-tree
 		git-gutter-fringe+
 		paredit
-		markdown-mode))
+		markdown-mode
+		wolfram-mode))
 
 (mapc #'package-install my-package-list)
 
@@ -243,6 +244,9 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 
+;; show inline images when loading a file
+(setq org-startup-with-inline-images t)
+
 ;; use auto-fill in org mode
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
@@ -357,6 +361,13 @@
 ;;
 (require 'transpose-frame)
 
+;;
+;; wolfram-mode
+;;
+(autoload 'wolfram-mode "wolfram-mode" nil t)
+(autoload 'run-wolfram "wolfram-mode" nil t)
+(setq wolfram-program "/Applications/Mathematica 10.2.app/Contents/MacOS/MathKernel")
+(add-to-list 'auto-mode-alist '("\\.m$" . wolfram-mode))
 
 ;;
 ;; icicles
