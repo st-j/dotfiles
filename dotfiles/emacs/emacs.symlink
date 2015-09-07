@@ -9,12 +9,24 @@
 (setq transient-mark-mode t)
 (show-paren-mode t) ; always highlight matching parentheses
 (if window-system (tool-bar-mode -1)) ; hide toolbar
+;; new frames created through emacsclient -n still have a toolbar,
+;; even with the above setting of (tool-bar-mode -1). The following
+;; function is run every time a new frame is created and switches off
+;; the toolbar
+(defun configure-new-frame (_)
+  (tool-bar-mode -1))
+(add-to-list 'after-make-frame-functions #'configure-new-frame)
+;; size of new frames
+(add-to-list 'default-frame-alist '(width  . 98))
+(add-to-list 'default-frame-alist '(height . 65))
+
 (setq default-tab-width 4) 
 (setq tab-width 4)
 (setq c-basic-offset 4)
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 (setq-default fill-column 95)
 (require 'whitespace)
+
 
 (setenv "PATH" (concat "/usr/local/bin:/usr/texbin:" (getenv "PATH")))
 
