@@ -7,5 +7,5 @@ on run --{input}
     -- bring the visible frame to the front
     tell application "Emacs" to activate
 
-    return input
+    -- return input
 end run
