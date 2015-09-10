@@ -56,7 +56,9 @@
 		git-gutter-fringe+
 		paredit
 		markdown-mode
-		wolfram-mode))
+		wolfram-mode
+		org-mac-link
+		apples-mode))
 
 (mapc #'package-install my-package-list)
 
@@ -328,6 +330,30 @@
 						   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 ;;
+;; org-ical
+;;
+(setq org-agenda-include-diary t)
+
+(setq org-agenda-custom-commands
+      '(("I" "Import diary from iCal" agenda ""
+         ((org-agenda-mode-hook
+           (lambda ()
+             (org-mac-iCal)))))))
+
+(add-hook 'org-agenda-cleanup-fancy-diary-hook
+          (lambda ()
+            (goto-char (point-min))
+            (save-excursion
+              (while (re-search-forward "^[a-z]" nil t)
+                (goto-char (match-beginning 0))
+                (insert "0:00-24:00 ")))
+            (while (re-search-forward "^ [a-z]" nil t)
+              (goto-char (match-beginning 0))
+              (save-excursion
+                (re-search-backward "^[0-9]+:[0-9]+-[0-9]+:[0-9]+ " nil t))
+              (insert (match-string 0)))))
+
+;;
 ;; MobileOrg
 ;;
 ;; Set to the location of your Org files on your local system
@@ -393,6 +419,12 @@
 (autoload 'run-wolfram "wolfram-mode" nil t)
 (setq wolfram-program "/Applications/Mathematica 10.2.app/Contents/MacOS/MathKernel")
 (add-to-list 'auto-mode-alist '("\\.m$" . wolfram-mode))
+
+;;
+;; Applescript mode
+;;
+(require 'apples-mode)
+(add-to-list 'auto-mode-alist '("\\.\\(applescri\\|sc\\)pt\\'" . apples-mode))
 
 ;;
 ;; icicles
