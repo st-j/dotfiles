@@ -316,6 +316,18 @@
 (require 'ox-odt)
 
 ;;
+;; link abbreviation for org attachments
+;;
+(setq org-link-abbrev-alist '(("att" . org-attach-expand-link)))
+
+;;
+;; mac link grabber
+;;
+(require 'org-mac-link)
+(add-hook 'org-mode-hook (lambda () 
+						   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
+
+;;
 ;; MobileOrg
 ;;
 ;; Set to the location of your Org files on your local system
@@ -324,6 +336,7 @@
 (setq org-mobile-inbox-for-pull "~/CloudDrive/org/inbox-mobile.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
 
 ;;
 ;; git gutter
@@ -547,7 +560,12 @@
  '(custom-safe-themes
    (quote
 	("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
+ '(doc-view-continuous t)
+ '(doc-view-ghostscript-program "/usr/local/bin/gs")
  '(helm-ff-skip-boring-files t)
+ '(org-modules
+   (quote
+	(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-mac-iCal org-mac-link)))
  '(org-src-fontify-natively t)
  '(org-src-tab-acts-natively t))
 (custom-set-faces
