@@ -269,8 +269,13 @@
 (setq org-agenda-files (list "~/CloudDrive/org/"))
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 (setq org-deadline-warning-days 0)
-
+(setq org-agenda-skip-scheduled-if-deadline-is-shown t)
 ;; todos
+
+;; priorities
+(setq org-highest-priority ?A)
+(setq org-default-priority ?N)
+(setq org-lowest-priority  ?Z)
 
 ; log time of todo changes
 (setq org-log-done 'time)
