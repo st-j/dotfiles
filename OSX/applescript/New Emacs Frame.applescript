@@ -2,7 +2,7 @@
 -- https://gist.github.com/ambethia/304964#comment-799519
 on run --{input}
     -- set filepath to quoted form of POSIX path of input
-	do shell script "/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -c -n " -- & filepath
+	do shell script "/usr/local/bin/emacsclient -c -n " -- & filepath
 
     -- bring the visible frame to the front
     tell application "Emacs" to activate
