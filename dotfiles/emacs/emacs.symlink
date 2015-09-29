@@ -27,6 +27,10 @@
 (setq-default fill-column 95)
 (require 'whitespace)
 
+;; Add the following to your init file to have packages installed by
+;; Homebrew added to your load-path:
+(let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (setenv "PATH" (concat "/usr/local/bin:/usr/texbin:" (getenv "PATH")))
 
@@ -268,9 +272,49 @@
 ;; which files to take into account for the agenda (all in the top-level org dir)
 (setq org-agenda-files (list "~/CloudDrive/org/"))
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
-(setq org-deadline-warning-days 0)
 (setq org-agenda-skip-scheduled-if-deadline-is-shown t)
+(setq org-deadline-warning-days 0)
+(setq org-agenda-skip-scheduled-if-done t)
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-columns-add-appointments-to-effort-sum 't) ; add appo
+
+(setq org-agenda-custom-commands
+      '(("I" "Import diary from iCal" agenda ""
+		  ((org-agenda-mode-hook
+			(lambda nil
+			  (org-mac-iCal)))))
+		("d" "Upcoming deadlines" agenda "" 
+                ((org-agenda-time-grid nil)
+                 (org-deadline-warning-days 365)        ;; [1]
+                 (org-agenda-entry-types '(:deadline))  ;; [2]
+                 ))
+      ;; other commands go here
+		))
+
+
 ;; todos
+(setq org-todo-keywords
+	  '((sequence  ; my own tasks
+		 "INACT(i)"    ; inactive tasks (not yet relevant, someday. review regularly, but not actionable yet.)
+		 "TODO(t)"    ; actionable items
+		 "STARTED(s)" ; started tasks
+		 "WAIT(w)"    ; waiting for someone else on this task
+		 "|"
+		 "DONE(d@)"   ; task is done
+		 "CANCELLED(x@)") ; task is cancelled
+		(sequence  ; tasks delegated to someone else
+		 "TODELEGATE(A)"   ; task ready to be delegated to someone
+		 "DELEGATED(D)"    ; task has been delegated
+		 "VERIFY(v)"       ; task reported as finished. verify DOD
+		 "DONE(@)"         ; task finished
+		 "CANCELLED(X@)")))  
+
+;; effort
+
+(setq org-global-properties
+			 '(("Effort_ALL" . "00:00 00:10 00:15 00:30 00:45 01:00 01:30 02:00 03:00 04:00 05:00 06:00 08:00 12:00 16:00 20:00 24:00")))
+
+(setq org-columns-default-format "%50ITEM(Task) %PRIORITY %10TODO %10TAGS %8Effort(Effort){:} %CLOCKSUM %SCHEDULED %DEADLINE")
 
 ;; priorities
 (setq org-highest-priority ?A)
@@ -321,6 +365,8 @@
 
 ;; exporting
 (require 'ox-odt)
+;;(require 'ox-taskjuggler) ;; not found...
+(setq org-export-with-drawers 't)
 
 ;;
 ;; link abbreviation for org attachments
@@ -338,12 +384,6 @@
 ;; org-ical
 ;;
 (setq org-agenda-include-diary t)
-
-(setq org-agenda-custom-commands
-      '(("I" "Import diary from iCal" agenda ""
-         ((org-agenda-mode-hook
-           (lambda ()
-             (org-mac-iCal)))))))
 
 (add-hook 'org-agenda-cleanup-fancy-diary-hook
           (lambda ()
@@ -600,6 +640,7 @@
  '(doc-view-continuous t)
  '(doc-view-ghostscript-program "/usr/local/bin/gs")
  '(helm-ff-skip-boring-files t)
+ '(org-export-backends (quote (ascii beamer html icalendar latex md taskjuggler)))
  '(org-modules
    (quote
 	(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-mac-iCal org-mac-link)))
