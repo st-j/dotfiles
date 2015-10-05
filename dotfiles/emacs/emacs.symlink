@@ -381,6 +381,14 @@
 						   (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)))
 
 ;;
+;; org-screenshot
+;;
+(require 'org-screenshot)
+(setq org-screenshot-command-line "screencapture -i %f")
+(add-hook 'org-mode-hook (lambda () 
+						   (define-key org-mode-map (kbd "C-c C-4") 'org-screenshot)))
+
+;;
 ;; org-ical
 ;;
 (setq org-agenda-include-diary t)
