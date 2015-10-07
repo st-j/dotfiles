@@ -653,7 +653,11 @@
    (quote
 	(org-bbdb org-bibtex org-docview org-gnus org-info org-irc org-mhe org-rmail org-w3m org-mac-iCal org-mac-link)))
  '(org-src-fontify-natively t)
- '(org-src-tab-acts-natively t))
+ '(org-src-tab-acts-natively t)
+ '(safe-local-variable-values
+   (quote
+	((root . \.\./comphys1\.tex)
+	 (root . \.\./aboutlecture\.tex)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
