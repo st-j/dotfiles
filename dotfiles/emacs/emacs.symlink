@@ -261,6 +261,8 @@
 ;; shortcuts
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+; use helm to search in org-mode tree nodesc
+(global-set-key (kbd "C-s-p") 'helm-org-in-buffer-headings)
 
 ;; show inline images when loading a file
 (setq org-startup-with-inline-images t)
