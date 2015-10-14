@@ -159,7 +159,7 @@
 ;;
 ;; line spacing
 ;;
-(setq-default line-spacing 4)
+(setq-default line-spacing '0.25)
 
 ;;
 ;; show time in modeline
@@ -268,6 +268,13 @@
 ;; use auto-fill in org mode
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+
+;;
+;; beef up org-mode looks
+;;
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
 ;; agenda configuration
 ;; which files to take into account for the agenda (all in the top-level org dir)
 (setq org-agenda-files (list "~/CloudDrive/org/"))
@@ -310,7 +317,6 @@
 		 "CANCELLED(X@)")))  
 
 ;; effort
-
 (setq org-global-properties
 			 '(("Effort_ALL" . "00:00 00:10 00:15 00:30 00:45 01:00 01:30 02:00 03:00 04:00 05:00 06:00 08:00 12:00 16:00 20:00 24:00")))
 
@@ -415,6 +421,11 @@
 (setq org-mobile-inbox-for-pull "~/CloudDrive/org/inbox-mobile.org")
 ;; Set to <your Dropbox root directory>/MobileOrg.
 (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
+;;
+;; scrum.el
+;;
+(require 'scrum)
 
 
 ;;
@@ -584,6 +595,11 @@
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\)$" .
                                 visual-basic-mode)) auto-mode-alist))
 
+;;
+;; revert all buffers
+;;
+;;(require 'revert-all-buffers)
+
 ;; 
 ;; python
 ;;
@@ -660,4 +676,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo")))))
+ '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#f8f8eb" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(org-done ((t (:foreground "DarkSeaGreen4" :weight bold))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#FD971F" :height 1.7))))
+ '(org-level-2 ((t (:inherit variable-pitch :foreground "OliveDrab3" :height 1.3))))
+ '(org-table ((t (:foreground "DarkSlateGray3")))))
