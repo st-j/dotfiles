@@ -265,6 +265,8 @@
 ;; shortcuts
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+; use helm to search in org-mode tree nodesc
+(global-set-key (kbd "C-s-p") 'helm-org-in-buffer-headings)
 
 ;; show inline images when loading a file
 (setq org-startup-with-inline-images t)
@@ -346,14 +348,14 @@
 
 ;; refile config, taken from http://doc.norang.ca/org-mode.html#Refiling
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets (quote ((nil :maxlevel . 5)
-                                 (org-agenda-files :maxlevel . 5 ))))
+(setq org-refile-targets '((nil . (:maxlevel . 4))
+						   (org-agenda-files . (:maxlevel . 4))))
 
 ; Use full outline paths for refile targets - we file directly with IDO
 (setq org-refile-use-outline-path t)
 
 ; Allow refile to create parent tasks with confirmation
-(setq org-refile-allow-creating-parent-nodes (quote confirm))
+(setq org-refile-allow-creating-parent-nodes 'confirm)
 
 
 ;; preserve (somewhat) the integrity of your archive structure while archiving lower level items
