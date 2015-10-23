@@ -218,6 +218,11 @@
 ;;;
 
 ;;
+;; Wanderlust
+;;
+(autoload 'wl "wl" "Wanderlust" t)
+
+;;
 ;; Helm
 ;;
 (require 'helm)
@@ -332,6 +337,16 @@
 (setq org-highest-priority ?A)
 (setq org-default-priority ?N)
 (setq org-lowest-priority  ?Z)
+
+;; capture
+;; stolen from http://rajshekhar.net/blog/archives/419-creating-org-mode-TODOs-from-wanderlust-emails.html
+(setq org-capture-templates '(("t" "Todo" entry
+							   (file+headline "~/CloudDrive/org/Inbox.org" "Tasks")
+							   " TODO %^{Brief Description} %^g\n%?\nAdded: %U" :prepend t)
+							  ("e" "Email Todo" entry
+							   (file+headline "~/CloudDrive/org/Inbox.org" "Tasks")
+							   "* TODO %^{Brief Description}\n%a\n%?Added: %U\n" :prepend t)
+							  ))
 
 ; log time of todo changes
 (setq org-log-done 'time)
