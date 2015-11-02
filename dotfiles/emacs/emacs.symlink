@@ -367,11 +367,14 @@
 
 ;; refile config, taken from http://doc.norang.ca/org-mode.html#Refiling
 ; Targets include this file and any file contributing to the agenda - up to 9 levels deep
-(setq org-refile-targets '((nil . (:maxlevel . 4))
-						   (org-agenda-files . (:maxlevel . 4))))
+;(setq org-refile-targets '((nil . (:maxlevel . 4))
+;						   (org-agenda-files . (:maxlevel . 4))))
+(setq org-refile-targets '((nil . (:maxlevel . 4))))
 
-; Use full outline paths for refile targets - we file directly with IDO
+; Use full outline paths for refile targets 
 (setq org-refile-use-outline-path t)
+; I found I have to set this to nil to make refiling work with helm
+(setq org-outline-path-complete-in-steps nil)
 
 ; Allow refile to create parent tasks with confirmation
 (setq org-refile-allow-creating-parent-nodes 'confirm)
@@ -623,7 +626,7 @@
 ;;
 ;; revert all buffers
 ;;
-;;(require 'revert-all-buffers)
+(load "revert-all-buffers.el")
 
 ;; 
 ;; python
