@@ -218,6 +218,11 @@
 ;;;
 
 ;;
+;; Nyan mode
+;;
+(nyan-mode 1)
+
+;;
 ;; Wanderlust
 ;;
 (autoload 'wl "wl" "Wanderlust" t)
