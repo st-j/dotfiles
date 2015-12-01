@@ -320,13 +320,15 @@
 		 "WAIT(w)"    ; waiting for someone else on this task
 		 "|"
 		 "DONE(d@)"   ; task is done
-		 "CANCELLED(x@)") ; task is cancelled
+		 "CANCELLED(x@)"  ; task is cancelled
+		 "TIMEOUT(o@)")    ; task run out of time 
 		(sequence  ; tasks delegated to someone else
 		 "TODELEGATE(A)"   ; task ready to be delegated to someone
 		 "DELEGATED(D)"    ; task has been delegated
 		 "VERIFY(v)"       ; task reported as finished. verify DOD
 		 "DONE(@)"         ; task finished
-		 "CANCELLED(X@)")))  
+		 "CANCELLED(X@)"
+		 "TIMEOUT(o@)")))  
 
 ;; effort
 (setq org-global-properties
