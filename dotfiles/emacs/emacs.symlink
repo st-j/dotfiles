@@ -218,6 +218,11 @@
 ;;;
 
 ;;
+;; Nyan mode
+;;
+(nyan-mode 1)
+
+;;
 ;; Wanderlust
 ;;
 (autoload 'wl "wl" "Wanderlust" t)
@@ -628,7 +633,7 @@
 ;;
 ;; revert all buffers
 ;;
-(load "revert-all-buffers.el")
+;; (load "revert-all-buffers.el")
 
 ;; 
 ;; python
@@ -690,7 +695,7 @@
  '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-	("0a1a7f64f8785ffbf5b5fbe8bca1ee1d9e1fb5e505ad9a0f184499fe6747c1af" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
+	("196cc00960232cfc7e74f4e95a94a5977cb16fd28ba7282195338f68c84058ec" "0a1a7f64f8785ffbf5b5fbe8bca1ee1d9e1fb5e505ad9a0f184499fe6747c1af" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
  '(doc-view-continuous t)
  '(doc-view-ghostscript-program "/usr/local/bin/gs")
  '(helm-ff-skip-boring-files t)
